@@ -19,10 +19,10 @@ import {
 import {
   Colors,
   DebugInstructions,
-  Header,
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import Header from './src/Components/Header/Header';
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -39,7 +39,8 @@ function App(): React.JSX.Element {
       />
 
       <View style={styles.headerContainer}>
-        <Text>Header</Text>
+        {/* <Text>Header</Text> */}
+        <Header title ="Shopping List App" mainStyles={styles.headerComponent}></Header>
       </View>
 
       <View style={styles.addItemsContainer}>
@@ -73,7 +74,7 @@ const styles = StyleSheet.create({
     borderColor: 'red',
   },
   listItemsContainer: {
-    flex: 7,
+    flex: 5,
     borderWidth: 1,
     borderColor: 'red',
   },
@@ -81,6 +82,9 @@ const styles = StyleSheet.create({
     flex: 1,
     borderWidth: 1,
     borderColor: 'red',
+  },
+  headerComponent: {
+    backgroundColor: 'lightyellow'
   },
 });
 

@@ -23,6 +23,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import Header from './src/Components/Header/Header';
+import Footer from './src/Components/Footer/Footer';
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -52,7 +53,8 @@ function App(): React.JSX.Element {
       </View>
 
       <View style={styles.footerContainer}>
-        <Text>Footer</Text>
+        {/* <Text>Footer</Text> */}
+        <Footer title='(c) Lab/TVT 2024' mainStyles={styles.footerComponent}></Footer>
       </View>
     </SafeAreaView>
   );
@@ -84,6 +86,9 @@ const styles = StyleSheet.create({
     borderColor: 'red',
   },
   headerComponent: {
+    backgroundColor: 'lightyellow'
+  },
+  footerComponent: {
     backgroundColor: 'lightyellow'
   },
 });

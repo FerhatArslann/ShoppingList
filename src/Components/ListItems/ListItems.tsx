@@ -1,35 +1,45 @@
 // ListItems.tsx
 
+/**
+ * ListItems.tsx sisältää käyttöliittymän ostoslistan näyttämiseen. 
+ * Tämä komponentti käyttää FlatList-komponenttia listan tuotteiden renderöimiseen.
+ * Käyttäjä voi poistaa tuotteita listalta käyttämällä kunkin rivin poistopainiketta.
+ */
+
 import React from 'react';
 import { View, FlatList, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import { ShoppingListItem } from '../../../App';
 
+// Props-tyypit määrittävät, mitä tietoja ListItems-komponentti saa käyttää.
 interface Props {
-  shoppingList: ShoppingListItem[];
-  setShoppingList: (shoppingList: ShoppingListItem[]) => void;
+  shoppingList: ShoppingListItem[];  // Nykyinen ostoslista
+  setShoppingList: (shoppingList: ShoppingListItem[]) => void;  // Funktio ostoslistan päivittämiseen
 }
 
 const ListItems: React.FC<Props> = ({ shoppingList, setShoppingList }) => {
+  // Funktio yksittäisen tuotteen poistamiseksi listalta sen ID:n perusteella
   const removeItem = (id: string) => {
     const filteredList = shoppingList.filter(item => item.id !== id);
     setShoppingList(filteredList);
   };
 
-  const renderItem = ({ item }) => (
+  // Renderöintifunktio, jota FlatList käyttää jokaisen listaelementin esittämiseen
+  const renderItem = ({ item }: { item: ShoppingListItem }) => (
     <View style={styles.itemContainer}>
       <Text style={styles.quantityText}>{item.quantity}</Text>
       <Text style={styles.itemText}>{item.item}</Text>
       <IconButton
-        icon="delete"
+        icon="delete"  // Poistopainikkeen ikoni react native paper sivulta
         size={20}
-        onPress={() => removeItem(item.id)}
+        onPress={() => removeItem(item.id)}  // Kutsuu removeItem-funktiota, kun painiketta painetaan
         mode="contained"
         style={styles.deleteButton}
       />
     </View>
   );
 
+  // Komponentti palauttaa FlatListin, joka käsittelee kaikkien listan tuotteiden renderöinnin
   return (
     <FlatList
       data={shoppingList}
@@ -40,6 +50,7 @@ const ListItems: React.FC<Props> = ({ shoppingList, setShoppingList }) => {
   );
 }
 
+// Tyylien määrittely komponentille
 const styles = StyleSheet.create({
   list: {
     flex: 1,
@@ -74,11 +85,11 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     borderRadius: 30,
     minWidth: 20,
-    fontSize:12,
+    fontSize: 12,
     textAlign: 'center',
   },
   deleteButton: {
-    // Ei tarvita muutoksia tähän, mutta voit säätää tarvittaessa
+    // Tähän voi jotain tyylejä määritellä painikkeelle jos haluaa...
   }
 });
 

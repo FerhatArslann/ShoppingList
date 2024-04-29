@@ -1,44 +1,50 @@
 // AddItem.tsx
 
+/**
+ * Tämä komponentti tarjoaa käyttöliittymän, jossa käyttäjä voi lisätä uusia tuotteita ostoslistaan.
+ * Käyttäjä syöttää tuotteen nimen ja määrän, jotka lisätään listaan tai päivitetään, jos tuote on jo listalla.
+ */
+
 import React, { useState } from 'react';
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 import { IconButton, Text, TextInput } from 'react-native-paper';
 import { ShoppingListItem } from '../../../App';
 
+// Komponentin props-tyypit
 interface Props {
-  shoppingList: ShoppingListItem[];
-  setShoppingList: (shoppingList: ShoppingListItem[]) => void;
-  mainStyles: StyleProp<ViewStyle>;    
+  shoppingList: ShoppingListItem[];  // Nykyinen ostoslista
+  setShoppingList: (shoppingList: ShoppingListItem[]) => void;  // Funktio ostoslistan päivittämiseksi
+  mainStyles: StyleProp<ViewStyle>;  // Tyyli-objekti ulkoasun määrittelyyn
 }
-
+// Tuotteen nimen ja määrän tila
 const AddItem: React.FC<Props> = ({ shoppingList, setShoppingList, mainStyles }) => {
   const [item, setItem] = useState<string>('');
-  const [quantity, setQuantity] = useState<string>('');  // Päivitetty olemaan string tilan hallintaa varten
+  const [quantity, setQuantity] = useState<string>('');
 
   const addItem = () => {
     if (!item) {
       console.log("Item cannot be empty");
     } else {
-      const quantityNumber = parseInt(quantity) || 1;  // Jos syötetty määrä on virheellinen tai tyhjä, oletetaan määräksi 1
+      const quantityNumber = parseInt(quantity) || 1;  // Muunnetaan määrä numeroksi, oletusarvo on 1
       const existingItemIndex = shoppingList.findIndex((listItem) => listItem.item.toLowerCase() === item.toLowerCase());
 
       if (existingItemIndex > -1) {
-        // Tuote on jo listalla, joten päivitetään sen määrää
+        // Jos tuote on jo listalla, päivitetään sen määrää
         const updatedShoppingList = [...shoppingList];
         const existingItem = updatedShoppingList[existingItemIndex];
-        existingItem.quantity += quantityNumber;  // Lisätään olemassa olevaan määrään
+        existingItem.quantity += quantityNumber;  // Lisätään määrä olemassa olevaan määrään
         setShoppingList(updatedShoppingList);
       } else {
-        // Tuotetta ei ole listalla, joten lisätään uusi
+        // Jos tuotetta ei ole listalla, luodaan uusi
         const newItem: ShoppingListItem = {
           item: item,
-          quantity: quantityNumber,  // Käytetään muunnettua määrää
-          id: shoppingList.length > 0 ? Math.max(...shoppingList.map(i => parseInt(i.id))) + 1 : '1',  // Oletetaan, että ID on string ja muunnetaan se
+          quantity: quantityNumber,
+          id: (shoppingList.length > 0 ? Math.max(...shoppingList.map(i => parseInt(i.id))) + 1 : 1).toString(), // Luodaan uusi ID
         };
         setShoppingList([...shoppingList, newItem]);
       }
-      setItem('');
-      setQuantity('');  // Tyhjennetään syöte uutta lisäystä varten
+      setItem('');  // Tyhjennetään kentät uutta syöttöä varten
+      setQuantity('');
     }
   };
   
@@ -50,7 +56,7 @@ const AddItem: React.FC<Props> = ({ shoppingList, setShoppingList, mainStyles })
         value={item}
         mode="outlined"
         style={styles.containerInputText}
-        onChangeText={(item) => setItem(item)}
+        onChangeText={(item) => setItem(item)}  // Päivittää input tilaa
         placeholder='Type name here'
       />
       <TextInput
@@ -67,12 +73,13 @@ const AddItem: React.FC<Props> = ({ shoppingList, setShoppingList, mainStyles })
         mode="contained"
         animated={true}
         size={20}
-        onPress={addItem}
+        onPress={addItem}  // Lisää uuden tuotteen listaa
       />
     </View>
   );
 }
 
+// Tyylien määrittely
 const styles = StyleSheet.create({
   container: {
     flex: 1,

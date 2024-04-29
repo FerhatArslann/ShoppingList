@@ -60,10 +60,11 @@ const styles = StyleSheet.create({
     marginRight: 40,
   },
   itemText: {
-    fontSize: 16,
+    fontSize: 18,
     color: 'black',
     flex: 1,
     marginLeft: 10,
+    fontWeight: 'bold',
   },
   quantityText: {
     backgroundColor: 'red',
@@ -73,6 +74,7 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     borderRadius: 30,
     minWidth: 20,
+    fontSize:12,
     textAlign: 'center',
   },
   deleteButton: {

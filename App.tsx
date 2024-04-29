@@ -78,6 +78,8 @@ function App(): React.JSX.Element {
     }
   }, [shoppingList]);
 
+  console.log(`ShoppingList ${JSON.stringify(shoppingList)}`)
+
   return (
     <SafeAreaView style={[styles.mainContainer, backgroundStyle]}>
       <StatusBar

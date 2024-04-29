@@ -46,7 +46,7 @@ const Header: React.FC<Props> = ({ title, mainStyles }) => {
         onDismiss={closeMenu}
         anchor={<Appbar.Action icon="dots-vertical" color="black" onPress={openMenu} />}
       >
-        <Menu.Item onPress={handleExit} title="Exit" />
+        <Menu.Item onPress={handleExit} title="Minimize" />
       </Menu>
     </Appbar.Header>
   );

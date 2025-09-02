@@ -14,7 +14,7 @@ A minimal cross-platform **React Native** shopping list app. Add, view, and remo
 |---|---|
 | ![Home](docs/images/home.png) | ![List](docs/images/list.png) |
 
-## Demo
+## Demo Video
 https://www.youtube.com/watch?v=ahE8RejpoTw
 
 ## Requirements
